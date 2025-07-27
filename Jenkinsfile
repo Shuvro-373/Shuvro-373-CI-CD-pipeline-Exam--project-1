@@ -95,17 +95,6 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    withKubeConfig(credentialsId: 'k8s') {
-                        sh 'kubectl apply -f deployment.yaml'
-                    }
-                }
-            }
-        }
-    }
-
     post {
         failure {
             echo "❌ Pipeline failed. Check logs above."
