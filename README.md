@@ -11,5 +11,5 @@ sudo apt install npm
 
 sudo npm install
 
-node app.js
+
 ## END THE khotom
