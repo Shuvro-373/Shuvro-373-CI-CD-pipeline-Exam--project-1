@@ -97,16 +97,25 @@ pipeline {
             }
         }
 
-                stage('Deploy to kubernets') {
+        stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    checkout scm // ✅ Ensures deployment.yaml is present
-                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                    checkout scm // Ensures deployment.yaml is present
+                    withKubeConfig(
+                        caCertificate: '', 
+                        clusterName: '', 
+                        contextName: '', 
+                        credentialsId: 'k8s', 
+                        namespace: '', 
+                        restrictKubeConfigAccess: false, 
+                        serverUrl: ''
+                    ) {
                         sh 'kubectl apply -f deployment.yaml'
                     }
                 }
             }
         }
+    }
 
     post {
         failure {
