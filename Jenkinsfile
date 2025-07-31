@@ -60,15 +60,19 @@ pipeline {
         }
 
         stage("Docker Build & Push") {
-            steps {
-                script {
-                    def GIT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-                    withDockerRegistry(credentialsId: 'dockerhub-creds') {
-                        sh """
-                            docker build -t shuvro373/exam-project:${GIT_COMMIT} -t shuvro373/exam-project:latest .
-                            docker push shuvro373/exam-project:${GIT_COMMIT}
-                            docker push shuvro373/exam-project:latest
-                        """
+    steps {
+        script {
+            def IMAGE_NAME = "shuvro373/exam-project"
+            def BUILD_TAG = "${BUILD_NUMBER}"
+            def GIT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+            def TAG_FULL = "${BUILD_TAG}-${GIT_COMMIT}"
+
+            withDockerRegistry(credentialsId: 'dockerhub-creds') {
+                sh """
+                    docker build -t ${IMAGE_NAME}:${TAG_FULL} -t ${IMAGE_NAME}:latest .
+                    docker push ${IMAGE_NAME}:${TAG_FULL}
+                    docker push ${IMAGE_NAME}:latest
+                """
                     }
                 }
             }
