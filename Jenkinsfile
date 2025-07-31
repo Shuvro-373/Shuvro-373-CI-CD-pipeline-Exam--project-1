@@ -64,13 +64,11 @@ pipeline {
         script {
             def IMAGE_NAME = "shuvro373/exam-project"
             def BUILD_TAG = "${BUILD_NUMBER}"
-            def GIT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-            def TAG_FULL = "${BUILD_TAG}-${GIT_COMMIT}"
 
             withDockerRegistry(credentialsId: 'dockerhub-creds') {
                 sh """
-                    docker build -t ${IMAGE_NAME}:${TAG_FULL} -t ${IMAGE_NAME}:latest .
-                    docker push ${IMAGE_NAME}:${TAG_FULL}
+                    docker build -t ${IMAGE_NAME}:${BUILD_TAG} -t ${IMAGE_NAME}:latest .
+                    docker push ${IMAGE_NAME}:${BUILD_TAG}
                     docker push ${IMAGE_NAME}:latest
                 """
                     }
