@@ -80,4 +80,4 @@ This project demonstrates a complete **CI/CD pipeline** for a Node.js-based Todo
 ├── sonar-project.properties       # SonarQube config
 ├── Dockerfile                     # Docker build file for app
 ├── README.md                      # You're reading it!
-## END THE khotom
+## END THE 
