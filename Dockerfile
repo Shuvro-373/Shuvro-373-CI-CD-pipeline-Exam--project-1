@@ -1,5 +1,5 @@
 #Dockerfile
-FROM node:12.2.0-slim
+FROM node:24-alpine
 WORKDIR app
 COPY . .
 RUN npm install
