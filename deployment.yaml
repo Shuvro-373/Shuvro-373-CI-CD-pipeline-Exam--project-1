@@ -15,6 +15,7 @@ spec:
       containers:
       - name: exam-project
         image: shuvro373/exam-project:latest
+        imagePullPolicy: Always 
         ports:
         - containerPort: 8000
 ---
@@ -30,4 +31,4 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 8000
-      nodePort: 30080
+      nodePort: 30080 
