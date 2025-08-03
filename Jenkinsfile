@@ -109,7 +109,7 @@ pipeline {
                         serverUrl: ''
                     ) {
                         sh 'kubectl apply -f deployment.yaml'
-                        
+                        sh 'kubectl rollout restart deployment exam-project'
                     }
                 }
             }
