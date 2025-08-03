@@ -1,7 +1,8 @@
-FROM node:18
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
+#Dockerfile
+FROM node:12.2.0-alpine
+WORKDIR app
 COPY . .
+RUN npm install
+
 EXPOSE 8000
-CMD ["npm", "start"]
+CMD ["node","app.js"]
